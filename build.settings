@@ -1,0 +1,125 @@
+--
+-- For more information on build.settings, see the Project Build Settings guide at:
+-- https://docs.coronalabs.com/guide/distribution/buildSettings
+--
+
+settings =
+{
+	orientation =
+	{
+		-- Supported values for orientation:
+		-- portrait, portraitUpsideDown, landscapeLeft, landscapeRight
+		default = "portrait",
+		supported = { "portrait", },
+	},
+
+	--
+	-- Android section
+	--
+	android =
+	{
+		usesPermissions =
+		{
+			"android.permission.INTERNET",
+		},
+	},
+
+	--
+	-- iOS section
+	--
+	iphone =
+	{
+		xcassets = "Images.xcassets",
+		plist =
+		{
+	--		MinimumOSVersion = "8.0",
+			UIStatusBarHidden = false,
+			UILaunchStoryboardName = "LaunchScreen",
+			ITSAppUsesNonExemptEncryption = false,
+			NSAppTransportSecurity = {
+				NSAllowsArbitraryLoads=true
+			},
+		},
+	},
+
+
+
+	--
+	-- Project section
+	--
+	excludeFiles =
+	{
+		-- Exclude unnecessary files for each platform
+		all = { "Icon.png", "Icon-*dpi.png", "Images.xcassets", },
+		android = { "LaunchScreen.storyboardc", },
+	},
+	
+	--
+	-- Android Section
+	
+		application = 
+{
+    license =
+    {
+        google =
+        {
+            key = "license",
+        },
+    },
+},
+	--
+	 plugins =
+    {
+	 --Google in app billing v3
+            ["plugin.google.iap.v3"] =
+            {
+                -- required
+                publisherId = "com.coronalabs",
+                supportedPlatforms = { android = true },
+            },  
+        
+        	--Plug in
+			["plugin.iap_badger"] =
+			{
+				-- required
+				publisherId = "uk.co.happymongoose",
+			},
+			
+    ["plugin.google.play.services"] =
+        {
+            publisherId = "com.coronalabs"
+        },
+		        ["plugin.notifications"] =
+        {
+            publisherId = "com.coronalabs"
+        },
+    
+					-- key is the name passed to Lua's 'require()'
+		["CoronaProvider.native.popup.social"] =
+		{
+			-- required
+			publisherId = "com.coronalabs",
+		},
+			    ["plugin.googleAnalytics"] =
+        {
+            publisherId = "com.coronalabs",
+            supportedPlatforms = { iphone=true, android=true, osx=true, win32=true }
+        },
+    
+    },      
+
+
+
+	android =
+	{
+		usesPermissions =
+		{
+			
+		"android.permission.ACCESS_NETWORK_STATE",
+		"android.permission.RECEIVE_BOOT_COMPLETED",
+			"android.permission.INTERNET",
+			"com.android.vending.BILLING",
+			"android.permission.WRITE_EXTERNAL_STORAGE"
+		},
+	},
+}
